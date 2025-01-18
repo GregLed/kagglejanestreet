@@ -12,8 +12,8 @@ VASTAI = not KAGGLE
 # Path with data should contain subdirectoriy "data" 
 # with data from https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/data
 base_paths = {
-    "VASTAI": Path("/home/janestreet2024"),
-    "VASTAI_DATA": Path("/workspace/kaggle/janestreet"),
+    "VASTAI": Path("/home/ubuntu/kagglejanestreet"),
+    "VASTAI_DATA": Path("/home/ubuntu/kagglejanestreet"),
     "KAGGLE": Path("/kaggle/input"),
 }
 
@@ -43,7 +43,7 @@ PATHS_DATA = {
 WANDB_PROJECT = "kaggle_janestreet"
 
 # Kaggle (to push code and models, not required)
-KAGGLE_USERNAME = "eivolkova"
+KAGGLE_USERNAME = "greg-led-87"
 
 # Default random seed
 RANDOM_SEED = 42

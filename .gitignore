@@ -165,9 +165,9 @@ junk
 analysis
 
 # Data
-# data/*
+data/*
 archive
-# models/*
+models/*
 submission.csv
 analysis
 

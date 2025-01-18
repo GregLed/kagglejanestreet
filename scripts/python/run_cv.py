@@ -8,7 +8,7 @@ from janestreet.data_processor import DataProcessor
 from janestreet.tracker import WandbTracker
 from janestreet.transformers import PolarsTransformer
 
-TRACK = False
+TRACK = True
 COMMENT = ""
 CATEGORY = "model_ver27_ts"
 
@@ -60,7 +60,7 @@ print(f"Number of features: {len(features)}")
 print(params_nn)
 
 for SEED in range(3):
-    MODEL_NAME = f"{MODEL_TYPE}_{NUM}.{SEED}_{700}_cv"
+    MODEL_NAME = f"{MODEL_TYPE}_{NUM}.{SEED}_{START}_cv"
 
     model = NN(**params_nn, random_seed=SEED)
 
