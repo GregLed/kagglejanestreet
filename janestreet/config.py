@@ -5,20 +5,27 @@ from pathlib import Path
 
 # Determine the execution environment based on environment variables
 KAGGLE = 'KAGGLE_URL_BASE' in os.environ
-VASTAI = not KAGGLE
+WIN = True if os.name.lower() == 'nt' else False
+VASTAI = (not KAGGLE) and (not WIN)
 
 # Define base paths for different environments (change if needed)
 # Data and models can be stored on a different volume
 # Path with data should contain subdirectoriy "data" 
 # with data from https://www.kaggle.com/competitions/jane-street-real-time-market-data-forecasting/data
 base_paths = {
+    "WINDOWS": Path("C:/projects/python/kagglejanestreet"),
     "VASTAI": Path("/home/ubuntu/kagglejanestreet"),
     "VASTAI_DATA": Path("/home/ubuntu/kagglejanestreet"),
     "KAGGLE": Path("/kaggle/input"),
 }
 
 # Set paths based on the environment (change if needed)
-if VASTAI:
+if WIN:
+    base_path = base_paths["WINDOWS"]
+    PATH_DATA = base_path / "data"
+    PATH_MODELS = base_path / "models"
+    PATH_CODE = base_path / "dist/janestreet-0.1-py3-none-any.whl"
+elif VASTAI:
     base_path = base_paths["VASTAI"]
     base_path_data = base_paths["VASTAI_DATA"]
     PATH_DATA = base_path_data / "data"

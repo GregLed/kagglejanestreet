@@ -11,13 +11,13 @@ def setup_environment(track: bool = False):
     """
     # Dotenv
     print("Loading environment variables from .env file...")
-    from dotenv import load_dotenv
-    load_dotenv()
+    from dotenv import load_dotenv, find_dotenv
+    _ = load_dotenv(find_dotenv())
 
     # Set up Weights & Biases
     if track:
         print("Setting up Weights & Biases...")
         import wandb
-        wandb.login(key=os.environ.get('WANDB_TOKEN'))
+        _ = wandb.login(key=os.environ.get('WANDB_TOKEN'))
 
     print("Environment setup complete.")

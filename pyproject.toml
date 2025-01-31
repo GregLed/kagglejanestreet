@@ -2,7 +2,7 @@
 name = "janestreet"
 version = "0.1.0"
 description = ""
-authors = ["Evgeniia <eivolkova3@gmail.com>"]
+authors = ["Greg"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -19,11 +19,16 @@ kaggle = "^1.6.17"
 grpcio = "^1.67.0"
 pyarrow = "^17.0.0"
 pytz = "^2024.2"
-torch = "2.4.0"
+torch = "2.4.1"
 torch_optimizer = "0.3.0"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"
+
+[[tool.poetry.source]]
+name = "torch"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
 
 [build-system]
 requires = ["poetry-core"]
