@@ -96,6 +96,9 @@ class CustomTensorDataset(Dataset):
             sorted_indices = torch.argsort(self.times, stable=True)
             sorted_indices = sorted_indices[torch.argsort(self.dates[sorted_indices], stable=True)]
             sorted_indices = sorted_indices[torch.argsort(self.symbols[sorted_indices], stable=True)]
+            # we want to have rows sorted by symbols, dates, and times
+            # so we start with symbol_id 0, its first date, and from time_id 0 .. 967
+
             self.X = self.X[sorted_indices]
             self.resp = self.resp[sorted_indices]
             self.dates = self.dates[sorted_indices]
@@ -103,7 +106,7 @@ class CustomTensorDataset(Dataset):
             self.weights = self.weights[sorted_indices]
             self.symbols = self.symbols[sorted_indices]
 
-            self.X = self.X.view(N//T, T, K)
+            self.X = self.X.view(N//T, T, K) # shape: (n_days*n_syms, times, k_features)
             self.resp = self.resp.view(N//T, T, self.resp.shape[-1])
             self.dates = self.dates.view(N//T, T)[:,0].squeeze()
             self.y = self.y.view(N//T, T)
