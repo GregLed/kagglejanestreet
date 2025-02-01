@@ -116,7 +116,7 @@ class CustomTensorDataset(Dataset):
 
         self.datetime_ids = self.dates
         self.unique_datetimes, self.inverse_indices, self.counts = torch.unique(
-            self.datetime_ids, return_inverse=True, return_counts=True
+            self.datetime_ids, sorted=True, return_inverse=True, return_counts=True
         )
 
         # this gives us sorted indices all of dates in our data set
@@ -139,15 +139,15 @@ class CustomTensorDataset(Dataset):
         """
         start = self.group_start_indices[index]
         end = self.group_end_indices[index]
-        index = self.sorted_indices[start:end]
+        idx = self.sorted_indices[start:end]
 
-        X = self.X[index] # data for one full day, shape: (n_symbols, 968 time_ids, k_features)
-        resp = self.resp[index] 
-        y = self.y[index] # shape: (n_symbols, 968 time_ids)
-        weights = self.weights[index] # shape: (n_symbols, 968 time_ids
+        X = self.X[idx] # data for one full day, shape: (n_symbols, 968 time_ids, k_features)
+        resp = self.resp[idx] 
+        y = self.y[idx] # shape: (n_symbols, 968 time_ids)
+        weights = self.weights[idx] # shape: (n_symbols, 968 time_ids)
 
         if self.on_batch:
-            T = max(self.times[index])+1
+            T = max(self.times[idx])+1
             X = X.reshape(T, -1, self.K).swapaxes(0, 1)
             resp = resp.reshape(T, -1, resp.shape[1]).swapaxes(0, 1)
             y = y.reshape(T, -1).swapaxes(0, 1)
