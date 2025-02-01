@@ -119,7 +119,11 @@ class CustomTensorDataset(Dataset):
             self.datetime_ids, return_inverse=True, return_counts=True
         )
 
+        # this gives us sorted indices all of dates in our data set
+        # e.g. first n_rows will represet the data for first date_id 
         self.sorted_indices = torch.argsort(self.inverse_indices)
+
+        # we need to know when to start and end groups of date_ids
         self.group_end_indices = torch.cumsum(self.counts, dim=0)
         self.group_start_indices = torch.cat((torch.tensor([0]), self.group_end_indices[:-1]))
 
@@ -137,10 +141,10 @@ class CustomTensorDataset(Dataset):
         end = self.group_end_indices[index]
         index = self.sorted_indices[start:end]
 
-        X = self.X[index]
-        resp = self.resp[index]
-        y = self.y[index]
-        weights = self.weights[index]
+        X = self.X[index] # data for one full day, shape: (n_symbols, 968 time_ids, k_features)
+        resp = self.resp[index] 
+        y = self.y[index] # shape: (n_symbols, 968 time_ids)
+        weights = self.weights[index] # shape: (n_symbols, 968 time_ids
 
         if self.on_batch:
             T = max(self.times[index])+1
