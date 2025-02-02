@@ -5,6 +5,8 @@ git config --global user.email "grzegorz.ledwon@yahoo.com"
 git config --global user.name "Greg"
 git clone https://github.com/GregLed/kagglejanestreet.git
 cd kagglejanestreet
+sudo apt install pipx
+pipx ensurepath
 pipx install poetry
 poetry install 
 
