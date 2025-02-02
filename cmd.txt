@@ -1,5 +1,10 @@
+# lambda
 mkdir /home/ubuntu/.config/kaggle
 scp -i /c/Users/grzeg/.ssh/id_ed25519 /c/projects/python/js24/kaggle.json ubuntu@129.158.215.218:/home/ubuntu/.config/kaggle/kaggle.json
+
+# vastai
+mkdir /root/.config/kaggle
+scp -i /c/Users/grzeg/.ssh/id_ed25519 /c/projects/python/js24/kaggle.json root@79.117.112.218:/root/.config/kaggle/kaggle.json
 
 git config --global user.email "grzegorz.ledwon@yahoo.com"
 git config --global user.name "Greg"
